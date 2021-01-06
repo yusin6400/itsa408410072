@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int main()
+{
+    int mission, leave, back, ans=0, i, j;
+    int hour_car[32]={0};
+    scanf("%d", &mission);
+    for(i=0; i<mission; i++) //同時間有幾個任務
+    {
+        scanf("%d %d", &leave, &back);
+        for(j=leave; j<back; j++) hour_car[j]++;
+    }
+    for(i=0; i<=24; i++)
+    {
+        if(ans<hour_car[i]) ans=hour_car[i];
+    }
+    printf("%d\n", ans);
+    return 0;
+}

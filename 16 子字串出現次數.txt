@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char test[128], input[512];
+    int times=0, i;
+    scanf("%s %s", test, input);
+    int tlen=strlen(test), inlen=strlen(input);
+    for(i=0; i<inlen-tlen+1; i++)
+    {
+        int j=0, p=i;
+        while(j<tlen)
+        {
+            if(input[p]!=test[j]) j+=tlen+1;
+            else
+            {
+                j++;
+                p++;
+            }
+        }
+        if(j==tlen) times++;
+    }
+    printf("%d\n", times);
+    return 0;
+}

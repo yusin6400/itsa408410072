@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main()
+{
+    int N, i, j, l;
+    scanf("%d", &N);
+    for(i=0; i<N; i++)
+    {
+        int T, m, k; //預算, 員工數, 物品數
+        scanf("%d %d %d", &T, &m, &k);
+        int price[k], cost=0; //物品價格, 花費
+        for(j=0; j<k; j++) scanf("%d", &price[j]);
+
+        for(j=0; j<k-1; j++) //價低到高
+        {
+            for(l=0; l<k-1-j; l++)
+            {
+                if(price[l]>price[l+1])
+                {
+                    int t=price[l];
+                    price[l]=price[l+1];
+                    price[l+1]=t;
+                }
+            }
+        }
+
+        for(j=0; j<m; j++) cost+=price[j];
+        if(cost<=T) printf("%d\n", cost);
+        else printf("Impossible\n");
+    }
+    return 0;
+}

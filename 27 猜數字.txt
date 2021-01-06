@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main()
+{
+    char ans[4], type[4];
+    int a, b, i, j;
+    scanf("%s", ans);
+    while(scanf("%s", type)!=EOF)
+    {
+        int end=0;
+        for(i=0; i<4; i++)
+        {
+            if(type[i]=='0') end++;
+        }
+        if(end==4) return 0;
+
+        a=0, b=0;
+        for(i=0; i<4; i++)
+        {
+            if(type[i]==ans[i]) a++;
+            for(j=0; j<4; j++)
+            {
+                if(type[i]==ans[j] && i!=j) b++;
+            }
+        }
+        printf("%dA%dB\n", a, b);
+    }
+}
