@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+char *getword(char *text,char *word)
+{
+    char *ptr=text;
+    char *qtr=word;
+    word[0]='\0';
+    while(*ptr==',') ptr++;
+    while(*ptr!=',' && *ptr!='\0') *qtr++=*ptr++;
+    *qtr='\0';
+    if(word[0]=='\0') return NULL;
+    return ptr;
+}
+
+int main()
+{
+    int a[4]={0}, i=0;
+    char input[128];
+    scanf("%s", input);
+    char *ptr=input, word[16];
+    while((ptr=getword(ptr, word))!=NULL)
+    {
+        a[i]=atoi(word);
+        i++;
+    }
+    // for(int j=0; j<i; j++) printf("%d ", a[j]);
+    int price=a[1]*15+a[2]*20+a[3]*30;
+    if(price>a[0]) printf("0\n");
+    else
+    {
+        int change=a[0]-price;
+        int five, fifty;
+        fifty=change/50;
+        change%=50;
+        five=change/5;
+        change%=5;
+        printf("%d,%d,%d\n", change, five, fifty);
+    }
+    return 0;
+}
