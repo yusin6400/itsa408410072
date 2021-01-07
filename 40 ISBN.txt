@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main()
+{
+    char input[16][2];
+    int num[16], fst_num[16]={0}, snd_num[16]={0};
+    for(int i=0; i<10; i++)
+    {
+        scanf("%s", input[i]);
+        if(strcmp(input[i], "X")==0) num[i]=10;
+        else num[i]=atoi(input[i]);
+    }
+    for(int i=0; i<10; i++)
+    {
+        for(int j=0; j<i+1; j++) fst_num[i]+=num[j];
+    }
+    for(int i=0; i<10; i++)
+    {
+        for(int j=0; j<i+1; j++) snd_num[i]+=fst_num[j];
+    }
+    if(snd_num[9]%11==0) printf("YES\n");
+    else printf("NO\n");
+}
