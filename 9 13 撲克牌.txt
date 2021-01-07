@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+char *getcard(char *text,char *word)
+{
+    char *ptr=text;
+    char *qtr=word;
+    word[0]='\0';
+    while(isspace(*ptr)) ptr++;
+    while(!isspace(*ptr) && *ptr!='\0')
+    {
+        *qtr++=*ptr++;
+    }
+    *qtr='\0';
+    if(word[0]=='\0') return NULL;
+    return ptr;
+}
+
+int main()
+{
+    int pile, i, j;
+    scanf("%d ", &pile);
+    char input[128];
+    while(fgets(input, 128, stdin))
+    {
+        pile--;
+        int cardcnt=0;
+        char *ptr=input, word[128], card[128][4];
+        int ncardcnt=0;
+        char newcard[128][128];
+        while((ptr=getcard(ptr,word))!=NULL)
+        {
+            strcpy(card[cardcnt++], word);
+        }
+        for(i=0; i<cardcnt; i++)
+            if(card[i][0]=='S') strcpy(newcard[ncardcnt++],card[i]);
+        
+        for(i=0; i<cardcnt; i++)
+            if(card[i][0]=='H') strcpy(newcard[ncardcnt++],card[i]);
+        for(i=0; i<cardcnt; i++)
+            if(card[i][0]=='D') strcpy(newcard[ncardcnt++],card[i]);
+        for(i=0; i<cardcnt; i++)
+            if(card[i][0]=='C') strcpy(newcard[ncardcnt++],card[i]);
+        
+        for(i=0; i<cardcnt-1; i++)
+        {
+            for(j=0; j<cardcnt-i-1; j++)
+            {
+                if(newcard[j][0]==newcard[j+1][0] && newcard[j][1]>newcard[j+1][1])
+                {
+                    char tmp[4];
+                    strcpy(tmp, newcard[j]);
+                    strcpy(newcard[j], newcard[j+1]);
+                    strcpy(newcard[j+1], tmp);
+                }
+            }
+        }
+        for(i=0; i<cardcnt-1; i++) printf("%s ", newcard[i]);
+        printf("%s\n", newcard[i]);
+        if(pile==0) return 0;
+    }
+    return 0;
+}

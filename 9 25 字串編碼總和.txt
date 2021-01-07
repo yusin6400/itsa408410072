@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main()
+{
+    int num, ans=0, i;
+    scanf("%d", &num);
+    while(num>0)
+    {
+        ans=0;
+        char input[32];
+        fgets(input, 32, stdin);
+        if(input[0]=='\n') continue;
+        int len=strlen(input)-1;
+        for(i=0; i<len; i++) ans+=input[i];
+        printf("%d\n", ans);
+        num--;
+    }
+    return 0;
+}
